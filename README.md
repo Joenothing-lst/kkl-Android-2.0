@@ -3,8 +3,9 @@
 * 重写了词库代码  
 * 新增配置项，位于kkl_bot/kkl/plugins/plus/kkl_config.py
 ## 
-缺少的模块请用pip  
-本项目是新手作品，写的很菜请多包涵。
+缺少的模块请使用pip  
+源码可根据Nonebot文档自定义更改  
+本项目是新手作品，写的很菜请多包涵。  
 ### 
 这里是用户使用说明书 https://docs.qq.com/doc/DUFV5ZEdyZVpkSUpM  
 教程什么的就不写了，rc佬的开发者文档写得很详尽 https://nonebot.cqp.moe/  
