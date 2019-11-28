@@ -97,7 +97,7 @@ async def group_ban(context):
             if f_message == '读取词库':
                 await bot.send_group_msg(group_id=f_group_id, message=wenda.readdir())
 
-        if f_self_id in f_message:
+        if f_self_id in f_mannger:
             if '抽' in f_message and '奖' in f_message and '路' not in f_message:
                 if f_user_id not in f_manager:
                     little = randint(120,480)
