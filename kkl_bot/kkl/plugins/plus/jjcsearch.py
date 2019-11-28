@@ -8,7 +8,6 @@ import sys
 sys.path.append(os.path.dirname(__file__))
 import kkl_config
 root=os.path.join(os.path.dirname(__file__),'image')
-os.chdir(root)
 
 #图片库
 name={'100101': ['猫拳.png','日和','猫拳'],
