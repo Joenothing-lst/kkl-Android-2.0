@@ -1,1 +1,1 @@
-{1: {'你好': 'hello' ,'help': '可可萝使用说明如下：https://docs.qq.com/doc/DUFV5ZEdyZVpkSUpM'}}
+{1: {'你好': 'hello' ,'help': '可可萝使用说明如下：https://jiewu.site/archives/16/'}}
