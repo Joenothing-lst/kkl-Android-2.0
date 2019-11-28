@@ -7,13 +7,13 @@ a={1:{}}
 #保存词库方法
 def savedir(dir):
     global a
-    with open(root,'w',encoding='gbk') as file:
+    with open(root,'w',encoding='utf-8') as file:
         data=file.write(str(dir))
     return '已保存~'
 #读取词库方法
 def readdir():
     global a
-    with open(root,'r',encoding='gbk') as file:
+    with open(root,'r',encoding='utf-8') as file:
         data=file.read()
         a=ast.literal_eval(data)
     return '已读取~'
