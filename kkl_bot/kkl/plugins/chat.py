@@ -97,9 +97,9 @@ async def group_ban(context):
             if f_message == '读取词库':
                 await bot.send_group_msg(group_id=f_group_id, message=wenda.readdir())
 
-        if '抽' in f_message and '奖' in f_message and '路' not in f_message:
+        if '抽' in f_message and '奖' in f_message or '一带一路' in f_message or '解除禁言' in f_message:
             if f_self_id in f_manager:
-                if f_user_id not in f_manager:
+                if f_user_id not in f_manager and '抽' in f_message and '奖' in f_message:
                     little = randint(120,480)
                     large = randint(12000,25000)
                     if '大' in f_message or '带' in f_message:
@@ -132,6 +132,7 @@ async def group_ban(context):
                         await bot.send_group_msg( group_id=f_group_id, message='这是管理权限哦')
             else:
                 await bot.send_group_msg( group_id=f_group_id, message='可可萝不是管理员哦')
+
 
         if '晚安' in f_message:
             if f_user_id in manager:
