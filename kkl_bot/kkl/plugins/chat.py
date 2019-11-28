@@ -97,8 +97,8 @@ async def group_ban(context):
             if f_message == '读取词库':
                 await bot.send_group_msg(group_id=f_group_id, message=wenda.readdir())
 
-        if f_self_id in f_mannger:
-            if '抽' in f_message and '奖' in f_message and '路' not in f_message:
+        if '抽' in f_message and '奖' in f_message and '路' not in f_message:
+            if f_self_id in f_manager:
                 if f_user_id not in f_manager:
                     little = randint(120,480)
                     large = randint(12000,25000)
@@ -109,29 +109,29 @@ async def group_ban(context):
                 else:
                     await bot.send_group_msg(group_id=f_group_id, message='权限狗无法参与(自裁吧')
 
-            if '[CQ:at,qq=' in f_message and 'all' not in f_message and '一带一路' in f_message:
-                p = 'CQ:at,qq=(\\d+)]'
-                qq = int(re.search(p,f_message).group(1))
-                if f_user_id not in f_manager and qq not in f_manager:
-                    bantime = randint(120,480)
-                    await bot.set_group_ban( group_id=f_group_id, user_id=f_user_id, duration=bantime + randint(-60,180))
-                    await bot.set_group_ban( group_id=f_group_id, user_id=qq, duration=bantime)
-                    await bot.send_group_msg( group_id=f_group_id, message=f'恭喜[CQ:at,qq={f_user_id}]成功带动了[CQ:at,qq={qq}]的经济发展')
-                elif f_user_id not in f_manager and qq in f_manager:
-                    await bot.send_group_msg( group_id=f_group_id, message=f'[CQ:at,qq={f_user_id}] 你的行动失败了，没有符合帮扶政策的群员，你将独享')
-                    await bot.set_group_ban( group_id=f_group_id, user_id=f_user_id, duration=randint(120,480))
-                elif f_user_id in f_manager:
-                    await bot.send_group_msg(group_id=f_group_id, message='权限狗无法参与(自裁吧')
-
-            if '解除禁言' in f_message and '[CQ:at,qq=' in f_message and 'all' not in f_message:
-                if f_user_id in f_manager:
+                if '[CQ:at,qq=' in f_message and 'all' not in f_message and '一带一路' in f_message:
                     p = 'CQ:at,qq=(\\d+)]'
                     qq = int(re.search(p,f_message).group(1))
-                    await bot.set_group_ban( group_id=f_group_id, user_id=qq, duration=0)
-                else:
-                    await bot.send_group_msg( group_id=f_group_id, message='这是管理权限哦')
-        else:
-            await bot.send_group_msg( group_id=f_group_id, message='可可萝不是管理员哦')
+                    if f_user_id not in f_manager and qq not in f_manager:
+                        bantime = randint(120,480)
+                        await bot.set_group_ban( group_id=f_group_id, user_id=f_user_id, duration=bantime + randint(-60,180))
+                        await bot.set_group_ban( group_id=f_group_id, user_id=qq, duration=bantime)
+                        await bot.send_group_msg( group_id=f_group_id, message=f'恭喜[CQ:at,qq={f_user_id}]成功带动了[CQ:at,qq={qq}]的经济发展')
+                    elif f_user_id not in f_manager and qq in f_manager:
+                        await bot.send_group_msg( group_id=f_group_id, message=f'[CQ:at,qq={f_user_id}] 你的行动失败了，没有符合帮扶政策的群员，你将独享')
+                        await bot.set_group_ban( group_id=f_group_id, user_id=f_user_id, duration=randint(120,480))
+                    elif f_user_id in f_manager:
+                        await bot.send_group_msg(group_id=f_group_id, message='权限狗无法参与(自裁吧')
+
+                if '解除禁言' in f_message and '[CQ:at,qq=' in f_message and 'all' not in f_message:
+                    if f_user_id in f_manager:
+                        p = 'CQ:at,qq=(\\d+)]'
+                        qq = int(re.search(p,f_message).group(1))
+                        await bot.set_group_ban( group_id=f_group_id, user_id=qq, duration=0)
+                    else:
+                        await bot.send_group_msg( group_id=f_group_id, message='这是管理权限哦')
+            else:
+                await bot.send_group_msg( group_id=f_group_id, message='可可萝不是管理员哦')
 
         if '晚安' in f_message:
             if f_user_id in manager:
@@ -144,7 +144,7 @@ async def group_ban(context):
                 if i in f_message:
                     f=False
             if f:
-                await bot.send_group_msg( group_id=f_group_id, message=f'[CQ:at,qq={f_user_id}]？')
+                await bot.send_group_msg( group_id=f_group_id, message=f'[CQ:at,qq={f_user_id}] ？')
     except :
         pass
 
