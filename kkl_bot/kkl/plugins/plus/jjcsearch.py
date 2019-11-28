@@ -161,7 +161,7 @@ def jjc_output(result,id):
             img=Image.open(out_msg_list[i][n])
             bk.paste(img,(5+n*65,10+i*70))
     bk.save(root+f'\\jjc\\{id}.png')
-    return f'已为骑士君按点赞数查到以下胜利队伍:\nf[CQ:image,file=file:///{root}\\out\\{id}.png]'
+    return f'已为骑士君按点赞数查到以下胜利队伍:\n[CQ:image,file=file:///{root}\\out\\{id}.png]'
 
 # name>>>id>>>name
 def total(msg,id):
