@@ -197,15 +197,16 @@ async def anime_search(session: CommandSession):
                     n=1
                 else:
                     n=data['docs'][i]['episode']
-                d[data['docs'][i]['title_chinese']]=[data['docs'][i]['similarity'],f'第{n}集',f'{int(m)}分{int(s)}秒处']
-        result=sorted(d,key=lambda x:x[1],reverse=True)
-        msg0=f'为骑士君按相似度找到以下{len(d)}个动漫：'
+                d[jianfan.toSimpleString(data['docs'][i]['title_chinese'])]=[data['docs'][i]['similarity'],f'第{n}集',f'{int(m)}分{int(s)}秒处']
+        result=sorted(d.items(),key=lambda x:x[1],reverse=True)
         t=0
+        msg0=f'为骑士君按相似度找到以下{len(d)}个动漫：'
         for i in result:
             t+=1
-            msg=(f'\n-----------------------------------------------\n({t})\n相似度：{d[i][0]}\n动漫名：《{jianfan.toSimpleString(i)}》\n时间点：{d[i][1]} {d[i][2]}')
+            msg=(f'\n-----------------------------------------------\n({t})\n相似度：{i[1][0]}\n动漫名：《{i[0]}》\n时间点：{i[1][1]} {i[1][2]}')
             msg0+=msg
         await session.send(msg0)
     else :
         print(r)
         await session.send('在下太忙啦，过会再来问吧')
+
