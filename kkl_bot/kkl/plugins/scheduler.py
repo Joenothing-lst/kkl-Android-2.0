@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
 from datetime import datetime
 import nonebot
-import os
 
 bot = nonebot.get_bot()
 #使用计划任务模块之前请在命令行执行pip install nonebot[scheduler]
