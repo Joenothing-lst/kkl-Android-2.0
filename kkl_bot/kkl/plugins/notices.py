@@ -2,11 +2,10 @@
 import nonebot
 from nonebot import on_notice, NoticeSession, on_request, RequestSession, on_command, CommandSession
 from aiocqhttp.exceptions import ActionFailed
-import os
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), 'plus'))
-import kkl_config
-master=kkl_config.master[0]
+
+bot=nonebot.get_bot()
+request_flag=False
+master = bot.config.MASTER[0]
 # 将函数注册为群成员增加通知处理器
 @on_notice('group_increase')
 async def increase(session: NoticeSession):
@@ -29,8 +28,6 @@ async def decrease(session: NoticeSession):
         name=inf['nickname']
         await session.send(f'{name}({q}) 跑了')
 
-bot=nonebot.get_bot()
-request_flag=False
 @on_request('group')
 async def bot_request(session: RequestSession):
     global request_flag
@@ -52,7 +49,6 @@ async def bot_request(session: RequestSession):
 async def friend_add(session: NoticeSession):
     f_user=session.ctx['user_id']
     await bot.send_private_msg(user_id=master,message=f'有人加我啦！\n{f_user}')
-
 
 @on_command('set_request', aliases=('开启邀请',), only_to_me=True)
 async def set_request(session: CommandSession):
