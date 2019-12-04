@@ -4,10 +4,8 @@ import requests
 import json
 from PIL import Image
 import os
-import sys
-sys.path.append(os.path.dirname(__file__))
-import kkl_config
 root=os.path.join(os.path.dirname(__file__),'image')
+os.chdir(root)
 
 #图片库
 name={'100101': ['猫拳.png','日和','猫拳'],
@@ -109,7 +107,6 @@ name={'100101': ['猫拳.png','日和','猫拳'],
       '111301': ['万圣兔子.png','万圣兔子','万圣美美','万圣兔兔'],
       '111401': ['露娜.png','露娜','璐娜','ルナ']}
 
-key=kkl_config.jjc_key
 
 # name>>>id
 def user_input(msg):
@@ -135,7 +132,7 @@ def user_input(msg):
     return numlst
 
 # search
-def jjcsearch(numlst):
+def jjcsearch(numlst,key):
     header = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
               'authorization':key}                                                           #网站作者提供的key，用于绕过验证，作者qq：196435005
     payload = {"_sign":"a","def":numlst,"nonce":"a","page":1,"sort":1,"region":1,"ts":1567847361}
@@ -163,13 +160,13 @@ def jjc_output(result,id):
     return f'已为骑士君按点赞数查到以下胜利队伍:\n[CQ:image,file=file:///{root}\\jjc\\{id}.png]'
 
 # name>>>id>>>name
-def total(msg,id):
+def total(msg,id,key):
     if key=='':
         return 'jjc查询key缺失，请联系作者qq：196435005'
     a=user_input(msg)         #返回list
     if type(a) != list:
         return a
-    b=jjcsearch(a)        #num
+    b=jjcsearch(a,key)        #num
     if b != []:
         return(jjc_output(b,id))
     else:
