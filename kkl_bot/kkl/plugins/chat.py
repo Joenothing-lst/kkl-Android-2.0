@@ -10,8 +10,9 @@ import wenda
 import kkl_config
 from aiocqhttp.exceptions import ActionFailed
 
-master = kkl_config.master#主人
-manager = kkl_config.manager#词库管理员，可管理全局词条
+bot = nonebot.get_bot()
+master = bot.config.MASTER
+first=True
 bangroup=[]#推送屏蔽群名单
 
 @on_command('send_group_list', aliases=('群信息',))
@@ -30,12 +31,9 @@ async def send_group_list(session: CommandSession):
             msg+='\n-----------------\n'+'群名称:' + group['group_name'] + '\n' +'群号:' + str(group['group_id'])
         await session.bot.send_private_msg(user_id=master[0],message=msg)
 
-@on_command('test', only_to_me=True)                     #changed
+@on_command('test', only_to_me=True)
 async def ts(session: CommandSession):
     await session.send(message=str(session.ctx))
-
-bot = nonebot.get_bot()
-first=True
 
 @bot.on_message('private')
 async def private_wenda_update(context):
@@ -45,12 +43,12 @@ async def private_wenda_update(context):
     if msg:
         await bot.send_private_msg(user_id=f_user_id, message=msg)
 
-    if f_user_id in manager:
+    if f_user_id in master:
         if '删除全局词条' in f_message :
             await bot.send_private_msg(user_id=f_user_id, message=wenda.delet(f_message,1))
 
         if '问' in f_message and '答' in f_message and '问答' not in f_message:
-            if '全局问' in f_message and f_user_id in manager:
+            if '全局问' in f_message and f_user_id in master:
                 await bot.send_private_msg(user_id=f_user_id, message=wenda.add(f_message,1))
             else:
                 await bot.send_private_msg(user_id=f_user_id, message=wenda.add(f_message,f_user_id))
@@ -89,7 +87,7 @@ async def group_ban(context):
                 await bot.send_group_msg(group_id=f_group_id, message=wenda.delet(f_message,f_group_id))
 
             if '问' in f_message and '答' in f_message and '问答' not in f_message:
-                if '全局问' in f_message and f_user_id in manager:
+                if '全局问' in f_message and f_user_id in master:
                     await bot.send_group_msg(group_id=f_group_id, message=wenda.add(f_message,1))
                 else:
                     await bot.send_group_msg(group_id=f_group_id, message=wenda.add(f_message,f_group_id))
@@ -133,7 +131,7 @@ async def group_ban(context):
 
 
         if '晚安' in f_message:
-            if f_user_id in manager:
+            if f_user_id in master:
                 await bot.send_group_msg( group_id=f_group_id, message=f'[CQ:at,qq={f_user_id}] 晚安，主人~ mua~')
             else :
                 await bot.send_group_msg( group_id=f_group_id, message=f'[CQ:at,qq={f_user_id}] 晚安，骑士君~')
