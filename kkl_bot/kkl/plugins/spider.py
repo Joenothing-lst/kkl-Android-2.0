@@ -2,8 +2,6 @@
 import nonebot
 from nonebot import on_command, CommandSession, permission as perm
 import os
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), 'plus'))
 import re
 import requests
 import jjcsearch
@@ -12,13 +10,11 @@ from google_translate import translate, ref_words
 import datetime as dt
 import jianfan
 import json
-import kkl_config
-master=kkl_config.master
 
 new_switch,hbook_switch,jjcsearch_switch=True,True,True
 @on_command('switch', aliases=('开启','关闭'), only_to_me=False) 
 async def switch(session: CommandSession):
-    if session.ctx['user_id'] in master:
+    if session.ctx['user_id'] in session.bot.config.MASTER:
         comman = session.ctx['raw_message'].split(' ',1)
         swtich = comman[0]#获取关键词
         plugins = comman[1]
