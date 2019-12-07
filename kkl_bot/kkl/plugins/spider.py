@@ -107,7 +107,7 @@ async def Tevents(session: CommandSession):
 @on_command('jjcsearch', aliases=('jjc查询','JJC查询','怎么拆','怎么解'), only_to_me=False)                 #changed
 async def jjcs(session: CommandSession):
     if ' ' in session.ctx['raw_message'] and jjcsearch_switch: 
-        result = jjcsearch.total(session.ctx['raw_message'],session.ctx['user_id'])
+        result = jjcsearch.total(session.ctx['raw_message'],session.ctx['user_id'],session.bot.config.JJC_KEY)
         await session.send(result)
 
 @on_command('ja_to_zh', aliases=('日语翻译',), only_to_me=False)                 #changed
