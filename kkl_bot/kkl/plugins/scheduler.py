@@ -9,7 +9,7 @@ bot = nonebot.get_bot()
 @nonebot.scheduler.scheduled_job('cron', hour='14', minute='50', second='0', misfire_grace_time=60) # = UTC+8 1445
 async def pcr_reminder():
     try:
-        group_list = await session.bot.get_group_list()
+        group_list = await bot.get_group_list()
         msg = '背刺Time背刺Time背刺Time背刺Time背刺Time!!!'
         groups = [group['group_id'] for group in group_list]
         for group in groups:
@@ -21,7 +21,7 @@ async def pcr_reminder():
 @nonebot.scheduler.scheduled_job('cron', hour='8', minute='0', second='0', misfire_grace_time=60) # = UTC+8 1445
 async def alarm():
     try:
-        group_list = await session.bot.get_group_list()
+        group_list = await bot.get_group_list()
         msg = '起床啦!!!'
         groups = [group['group_id'] for group in group_list]
         for group in groups:
@@ -32,7 +32,7 @@ async def alarm():
 @nonebot.scheduler.scheduled_job('cron', hour='23', minute='0', second='0', misfire_grace_time=60) # = UTC+8 1445
 async def need_sleep():
     try:
-        group_list = await session.bot.get_group_list()
+        group_list = await bot.get_group_list()
         msg = '现在23点，骑士君该睡觉了！'
         groups = [group['group_id'] for group in group_list]
         for group in groups:
