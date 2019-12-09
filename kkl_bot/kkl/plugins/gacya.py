@@ -95,7 +95,7 @@ fesgacya = ['克总.png',
         '江户抖m.png',
         '江户扇子.png']
 
-up = ['水电站.png']
+up = ['水狼.jpg']
 fes = False
 background = Image.new('RGBA',(330,135),color='lavenderblush')
 
