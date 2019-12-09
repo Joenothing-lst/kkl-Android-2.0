@@ -7,7 +7,6 @@ from nonebot import on_command, CommandSession, Message, permission as perm
 from random import choice,randint
 import re
 import wenda
-import kkl_config
 from aiocqhttp.exceptions import ActionFailed
 
 bot = nonebot.get_bot()
@@ -128,7 +127,6 @@ async def group_ban(context):
                     await bot.send_group_msg(group_id=f_group_id, message='权限狗无法参与(自裁吧')
             else:
                 await bot.send_group_msg( group_id=f_group_id, message='可可萝不是管理员哦')
-
 
         if '晚安' in f_message:
             if f_user_id in master:
