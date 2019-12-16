@@ -162,7 +162,7 @@ def jjc_output(result,id):
 # name>>>id>>>name
 def total(msg,id,key):
     if key=='':
-        return 'jjc查询key缺失，请联系作者qq：196435005'
+        return 'jjc查询key缺失，请联系jjc网站作者qq：196435005'
     a=user_input(msg)         #返回list
     if type(a) != list:
         return a
