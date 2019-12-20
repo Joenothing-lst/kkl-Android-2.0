@@ -156,6 +156,7 @@ def jjc_output(result,id):
         for n in range(5):
             try:
                 img=Image.open(out_msg_list[i][n])
+                img=img.resize((60,60))
             except:
                 return f'结果中有未知ID【{i}】,请更新jjc资料库'
             bk.paste(img,(5+n*65,10+i*70))
