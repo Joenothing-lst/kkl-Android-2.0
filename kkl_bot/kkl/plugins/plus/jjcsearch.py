@@ -154,7 +154,10 @@ def jjc_output(result,id):
     bk=Image.new('RGBA',(330,int(len(out_msg_list))*70+10),color='lavenderblush')
     for i in range(len(out_msg_list)):
         for n in range(5):
-            img=Image.open(out_msg_list[i][n])
+            try:
+                img=Image.open(out_msg_list[i][n])
+            except:
+                return f'结果中有未知ID【{i}】,请更新jjc资料库'
             bk.paste(img,(5+n*65,10+i*70))
     bk.save(root+f'\\jjc\\{id}.png')
     return f'已为骑士君按点赞数查到以下胜利队伍:\n[CQ:image,file=file:///{root}\\jjc\\{id}.png]'
