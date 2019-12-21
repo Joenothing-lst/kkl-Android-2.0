@@ -134,7 +134,7 @@ def user_input(msg):
 # search
 def jjcsearch(numlst,key):
     header = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
-              'authorization':key}                                                           #网站作者提供的key，用于绕过验证，作者qq：196435005
+              'authorization':key}                            #网站作者提供的key，用于绕过验证，如果理解了代码而且有一定的原创功能，还想要用api的话再来联系196435005
     payload = {"_sign":"a","def":numlst,"nonce":"a","page":1,"sort":1,"region":1,"ts":1567847361}
     data = requests.post('https://api.pcrdfans.com/x/v1/search',headers = header,data = json.dumps(payload))
     pattens = '{"equip":.*?,"id":(\\d+),"star":.*?}'#专武 角色 星数
