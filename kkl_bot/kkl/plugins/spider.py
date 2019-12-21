@@ -92,14 +92,13 @@ async def Tnews(session: CommandSession):
 async def Tevents(session: CommandSession):
     header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
     response = requests.get('https://pcredivewiki.tw/static/data/event.json',headers = header)
-    event_pattern = '{\r\n    "campaign_name" : "(.*?)",\r\n    "start_time" : "(.*?)",\r\n    "end_time" : "(.*?)",\r\n    "type" : ".*?"\r\n  }'
-    data = re.findall(event_pattern,response.text)
+    data = json.loads(response.text)
     n=dt.datetime.now()
     msg0 = '已查询到以下活动：'
-    for i,j,k in data:
-        t=dt.datetime.strptime(k,'%Y/%m/%d %H:%M')
+    for i in data:
+        t=dt.datetime.strptime(i['end_time'],'%Y/%m/%d %H:%M')
         if t>n:
-            msg=(f'\n-----------------------------------------------\n活动名称：{jianfan.toSimpleString(i)}\n活动时间：{j[5:]}--{k[5:]}')
+            msg=('\n-----------------------------------------------\n活动名称：{}\n活动时间：{}--{}'.format(i['campaign_name'],i['start_time'][5:],i['end_time'][5:]))
             msg0+=msg
     await session.send(message= msg0)
 
