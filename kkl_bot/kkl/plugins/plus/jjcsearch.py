@@ -166,7 +166,7 @@ def jjc_output(result,id):
 # name>>>id>>>name
 def total(msg,id,key):
     if key=='':
-        return 'jjc查询key缺失'
+        return '查询失败,此功能未开放'
     a=user_input(msg)         #返回报错信息
     if type(a) != list:
         return a
