@@ -98,9 +98,10 @@ async def Tevents(session: CommandSession):
     for i in data:
         t=dt.datetime.strptime(i['end_time'],'%Y/%m/%d %H:%M')
         if t>n:
-            msg=('\n-----------------------------------------------\n活动名称：{}\n活动时间：{}--{}'.format(i['campaign_name'],i['start_time'][5:],i['end_time'][5:]))
+            msg=('\n-----------------------------------------------\n活动名称：{}\n活动时间：{}--{}'.format(jianfan.toSimpleString(i['campaign_name']),i['start_time'][5:],i['end_time'][5:]))
             msg0+=msg
     await session.send(message= msg0)
+
 
 
 @on_command('jjcsearch', aliases=('jjc查询','JJC查询','怎么拆','怎么解'), only_to_me=False)                 #changed
