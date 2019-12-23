@@ -169,10 +169,10 @@ def jjc_output(result,id):
 async def total(msg,id,key):
     #remsg=''
     if key=='':
-        remsg='jjc查询key缺失，请联系作者qq：196435005'
+        return '本功能暂未开放，请阅览源码'
     a=user_input(msg)         #返回list
     if type(a) != list:
-        remsg= a
+        return a
     b=await jjcsearch(a,key)        #num
     if b != []:
         remsg=(jjc_output(b,id))
