@@ -129,7 +129,7 @@ async def jjcs(session: CommandSession):
         msg=session.current_arg.strip()
         if not msg:
             f_msg = session.get('message', prompt='骑士君想查什么阵容呢？\nps：用空格分隔')
-        result = jjcsearch.total(msg,session.ctx['user_id'],session.bot.config.JJC_KEY)
+        result = await jjcsearch.total(msg,session.ctx['user_id'],session.bot.config.JJC_KEY)
         await session.send(result)
 
 @on_command('ja_to_zh', aliases=('日语翻译',), only_to_me=False)                 #changed
