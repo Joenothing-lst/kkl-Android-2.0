@@ -106,27 +106,28 @@ async def gacya(session: CommandSession):
         else :                           #1星
             result.append(rd.choice(gacya1))
     result.append(rd.choice(gacya2)) if (rd.random()*100 < s3) else result.append(rd.choice(gacya_3+up))
+
     name=session.ctx['user_id']
     a=0
     for x in range(5):
         for y in range(2):
             pic=Image.open(result[a])
+
             background.paste(pic,(x*65+5,y*65+5))
             a+=1
     background.save(root+f'\\out\\{name}.png')
     await session.send(msg+f'[CQ:image,file=file:///{root}\\out\\{name}.png]')
 
-@on_command('set_gacya',aliases=('设置',),only_to_me=False)
+@on_command('set_gacya',aliases=('卡池设置',),only_to_me=False)
 async def set_gacya(session:CommandSession):
     global fes,isdouble
     if master == session.ctx['user_id']:
-        msg=session.current_arg_text.strip()
+        msg=session.current_arg.strip()
         if not msg:
-            msg = session.get('message', prompt='准备完成')
+            msg = session.get('message', prompt='准备完成，请发送设置')
         fes=msg[0]
         try:
             isdouble=msg[1]
         except:
             isdouble='0'
         await session.send(message=f'设置完成,现在卡池设置\nfes：{fes}\n双倍：{isdouble}')
-
