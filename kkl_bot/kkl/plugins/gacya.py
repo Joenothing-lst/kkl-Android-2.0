@@ -106,13 +106,11 @@ async def gacya(session: CommandSession):
         else :                           #1星
             result.append(rd.choice(gacya1))
     result.append(rd.choice(gacya2)) if (rd.random()*100 < s3) else result.append(rd.choice(gacya_3+up))
-
     name=session.ctx['user_id']
     a=0
     for x in range(5):
         for y in range(2):
             pic=Image.open(result[a])
-
             background.paste(pic,(x*65+5,y*65+5))
             a+=1
     background.save(root+f'\\out\\{name}.png')
