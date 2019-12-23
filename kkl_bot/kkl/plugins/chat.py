@@ -155,11 +155,14 @@ async def unset_ban(session: CommandSession):
 @on_command('send_all_group', aliases=('公告','群发','推送',), only_to_me=False)
 async def send_all_group(session: CommandSession):
     if session.ctx['user_id'] in master:
+        msg=session.current_arg.strip()
+        if not msg:
+            msg = session.get('message', prompt='准备完成')
         group_list = await session.bot.get_group_list()
         for group in group_list:
             if group['group_id'] not in bangroup:
                 try:
-                    await bot.send_group_msg( group_id=group['group_id'], message=session.ctx['raw_message'][3:])
+                    await bot.send_group_msg( group_id=group['group_id'], message=msg)
                 except:
                     pass
         await session.send('推送完成')
