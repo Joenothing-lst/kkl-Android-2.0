@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import re
-import requests
+from aiohttp import ClientSession
 import json
 from PIL import Image
 import os
@@ -131,31 +131,34 @@ def user_input(msg):
     return numlst
 
 # search
-def jjcsearch(numlst,key):
+async def jjcsearch(numlst,key):
     header = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
-              'authorization':key}                            #网站作者提供的key，用于绕过验证，如果理解了代码而且有一定的原创功能，还想要用api的话再来联系196435005
+              'authorization':key}                                                           #网站作者提供的key，用于绕过验证，作者qq：196435005
     payload = {"_sign":"a","def":numlst,"nonce":"a","page":1,"sort":1,"region":1,"ts":1567847361}
-    data = requests.post('https://api.pcrdfans.com/x/v1/search',headers = header,data = json.dumps(payload))
+    url = 'https://api.pcrdfans.com/x/v1/search'
+    async with ClientSession() as asyncsession:
+        async with asyncsession.post(url,headers=header,data=json.dumps(payload)) as response:
+            data = await response.read()
+    #data = requests.post(url,headers = header,data = json.dumps(payload))
     pattens = '{"equip":.*?,"id":(\\d+),"star":.*?}'#专武 角色 星数
-    num = re.findall(pattens ,data.text)
+    num = re.findall(pattens ,data.decode())
     return num
 
 # id>>>image
 def jjc_output(result,id):
-    out_msg_list = []
+    #out_msg_list = []
     for n in range(len(result)):
         for i,j in name.items():
             if i == result[n]:
                 result[n]=j[0]
-    for i in range(0,len(result),10):
+    #for i in range(0,len(result),10):
 #          print(i)
-        out_msg_list.append(result[i:i+5])
+    out_msg_list=[result[i:i+5] for i in range(0,len(result),10)]
     bk=Image.new('RGBA',(330,int(len(out_msg_list))*70+10),color='lavenderblush')
     for i in range(len(out_msg_list)):
         for n in range(5):
             try:
                 img=Image.open(out_msg_list[i][n])
-                img=img.resize((60,60))
             except:
                 return f'结果中有未知ID【{i}】,请更新jjc资料库'
             bk.paste(img,(5+n*65,10+i*70))
@@ -163,14 +166,16 @@ def jjc_output(result,id):
     return f'已为骑士君[CQ:at,qq={id}]查到以下胜利队伍:\n[CQ:image,file=file:///{root}\\jjc\\{id}.png]'
 
 # name>>>id>>>name
-def total(msg,id,key):
+async def total(msg,id,key):
+    #remsg=''
     if key=='':
-        return '查询失败,此功能未开放'
-    a=user_input(msg)         #返回报错信息
+        remsg='jjc查询key缺失，请联系作者qq：196435005'
+    a=user_input(msg)         #返回list
     if type(a) != list:
-        return a
-    b=jjcsearch(a,key)        #num
+        remsg= a
+    b=await jjcsearch(a,key)        #num
     if b != []:
-        return(jjc_output(b,id))
+        remsg=(jjc_output(b,id))
     else:
-        return('抱歉，可可萝没有找到解法哦')
+        remsg='抱歉，可可萝没有找到解法哦'
+    return remsg
