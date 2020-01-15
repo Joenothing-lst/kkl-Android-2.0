@@ -8,7 +8,7 @@ a={1:{}}
 def savedir(msg):
     global a
     with open(root,'w',encoding='utf-8') as file:
-    json.dump(msg, file, ensure_ascii=False)
+        json.dump(msg, file, ensure_ascii=False)
     return '已保存~'
 #读取词库方法
 def readdir():
