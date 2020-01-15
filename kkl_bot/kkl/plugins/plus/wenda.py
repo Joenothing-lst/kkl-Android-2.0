@@ -5,10 +5,10 @@ import json
 root=os.path.join(os.path.dirname(__file__),'kkl_dictionary.json')
 a={1:{}}
 #保存词库方法
-def savedir(js):
+def savedir(msg):
     global a
     with open(root,'w',encoding='utf-8') as file:
-        file.write(js)
+        json.dump(msg, file, ensure_ascii=False)
     return '已保存~'
 #读取词库方法
 def readdir():
