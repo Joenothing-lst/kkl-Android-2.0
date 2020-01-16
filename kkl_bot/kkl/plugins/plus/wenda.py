@@ -3,7 +3,7 @@ import os
 import re
 import json
 root=os.path.join(os.path.dirname(__file__),'kkl_dictionary.json')
-a={1:{}}
+a={'1':{}}
 #保存词库方法
 def savedir(msg):
     global a
