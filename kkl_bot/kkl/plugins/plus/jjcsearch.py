@@ -163,7 +163,7 @@ def jjc_output(result,id):
             try:
                 img=Image.open(out_msg_list[i][n])
             except:
-                return f'结果中有未知ID【{i}】,请更新jjc资料库'
+                return f'结果中有未知ID【{out_msg_list[i][n]}】,请更新jjc资料库'
             bk.paste(img,(5+n*65,10+i*70))
     bk.save(root+f'\\jjc\\{id}.png')
     return f'已为骑士君[CQ:at,qq={id}]查到以下胜利队伍:\n[CQ:image,file=file:///{root}\\jjc\\{id}.png]'
