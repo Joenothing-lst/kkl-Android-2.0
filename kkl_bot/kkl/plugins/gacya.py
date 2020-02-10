@@ -72,7 +72,7 @@ gacya1 = ['猫拳.png',
 fesgacya = ['克总.png',
         '511.png']
 
-up = ['水狐狸.png']
+up = ['万圣唯.png']
 fes = '0'
 isdouble = '0'
 background = Image.new('RGBA',(330,135),color='lavenderblush')
@@ -131,3 +131,15 @@ async def set_gacya(session:CommandSession):
         except:
             isdouble='0'
         await session.send(message=f'设置完成,现在卡池设置\nfes：{fes}\n双倍：{isdouble}')
+
+@on_command('set_up',aliases=('up设置',),only_to_me=False)
+async def set_up(session:CommandSession):
+    global up
+    if master == session.ctx['user_id']:
+        msg=session.current_arg.split()
+        up= [f'{i}.png' for i in msg]
+        await session.send(message='设置完成,现在卡池up角色：{}'.format(''.join([f'[CQ:image,file=file:///{root}\\{i}]'  for i in up])))
+
+@on_command('show_up',aliases=('看看up','看看卡池','康康up','康康卡池',),only_to_me=False)
+async def show_up(session:CommandSession):
+    await session.send(message='现在卡池up角色：{}'.format(''.join([f'[CQ:image,file=file:///{root}\\{i}]' for i in up])))
