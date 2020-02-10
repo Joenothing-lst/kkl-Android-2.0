@@ -1,0 +1,4 @@
+demjson
+requests
+pillow
+numpy
