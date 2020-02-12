@@ -63,15 +63,15 @@ async def Rnews(session: CommandSession):
     data = data.decode()
 
     pattern_title = '<h4>(.*?)</h4>'#标题
-    title = re.findall(pattern_title,data.text)
+    title = re.findall(pattern_title,data)
 
     pattern_link = '<a href="(.*?)">'#链接
-    link0 = re.findall(pattern_link,data.text)
+    link0 = re.findall(pattern_link,data)
     link = [link0[i] for i in range(len(link0)) if 'new' in link0[i]]
     del(link[0],link[-1])
 
     pattern_time = '<time class="time">(.*?)</time>'#发布时间
-    time = re.findall(pattern_time,data.text)
+    time = re.findall(pattern_time,data)
 
     msg0 = '已为骑士君查询最新{}条新闻：'.format(len(title))
     for i in range(len(title)):
