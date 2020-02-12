@@ -138,7 +138,7 @@ def user_input(msg):
 # search
 async def jjcsearch(numlst,key):
     header = {'user-agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
-              'authorization':key}                                                           #网站作者提供的key，用于绕过验证，作者qq：196435005
+              'authorization':key}                                                           #网站作者提供的key，用于绕过验证
     payload = {"_sign":"a","def":numlst,"nonce":"a","page":1,"sort":1,"region":1,"ts":1567847361}
     url = 'https://api.pcrdfans.com/x/v1/search'
     async with ClientSession() as asyncsession:
