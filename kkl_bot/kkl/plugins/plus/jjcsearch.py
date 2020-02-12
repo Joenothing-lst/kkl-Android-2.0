@@ -174,7 +174,7 @@ def jjc_output(result,id):
 async def total(msg,id,key):
     #remsg=''
     if key=='':
-        return '本功能暂未开放，请阅览源码'
+        return '本功能暂未开放'
     a=user_input(msg)         #返回list
     if type(a) != list:
         return a
